@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE project SYSTEM "../dtd/Project.dtd">
+
+<project default="test">
+
+	<target name="test">
+
+		<webtest name="check that Ticketeer comes up">
+			<invoke url="http://localhost:8080/Ticketeer/" description="Go to Ticketeer"/>
+			<verifyTitle text="Login" />
+            <setInputField name="username" value="rrothenb@yahoo.com"/>
+            <setInputField description="Set password field password: bovine" name="password" value="bovine"/>
+            <clickButton label="Sign in"/>
+			<verifyTitle text="Create Reservation" />
+<setInputField name="customer" value="je"/>
+<setInputField htmlId="customer" value="je"/>
+<setInputField forLabel="Customer:" value="je"/>
+<clickLink label="Rothenberg, Jessa"/>
+<setInputField name="notes" value="This is a test"/>
+<setInputField htmlId="notes" value="This is a test"/>
+<setInputField forLabel="Notes:" value="This is a test"/>
+<setCheckbox name="paid"/>
+<setCheckbox htmlId="paid"/>
+<setCheckbox forLabel="Paid:"/>
+<clickButton label="Add Seats"/>
+<clickButton label="Add Seats" name="seats_add"/>
+<clickButton htmlId="seats_add"/>
+<clickButton name="seats_add"/>
+<setInputField name="seats_0_quantity" value="2"/>
+<setInputField htmlId="seats_0_quantity" value="2"/>
+<clickButton label="Add Seats"/>
+<clickButton label="Add Seats" name="seats_add"/>
+<clickButton htmlId="seats_add"/>
+<clickButton name="seats_add"/>
+<setInputField name="seats_1_quantity" value="3"/>
+<setInputField htmlId="seats_1_quantity" value="3"/>
+<clickButton label="Create"/>
+<clickButton label="Create" name=""/>
+<clickLink label="Rothenberg, Jessa"/>
+<setCheckbox name="paid"/>
+<setCheckbox htmlId="paid"/>
+<setCheckbox forLabel="Paid:"/>
+<setInputField name="notes" value="This is a another test"/>
+<setInputField htmlId="notes" value="This is a another test"/>
+<setInputField forLabel="Notes:" value="This is a another test"/>
+<setSelectField name="performance.id" text="Carbuncle - Fri, 10/29/10 at 5:50 AM (0)"/>
+<setSelectField htmlId="performance.id" text="Carbuncle - Fri, 10/29/10 at 5:50 AM (0)"/>
+<clickLink label=" "/>
+<setSelectField name="seats_0_price.id" text="Carbuncle! ($10.00)"/>
+<setSelectField htmlId="seats_0_price.id" text="Carbuncle! ($10.00)"/>
+<setInputField name="seats_0_quantity" value="1"/>
+<setInputField htmlId="seats_0_quantity" value="1"/>
+<clickButton label="Update"/>
+<clickButton label="Update" name="_action_Update"/>
+<clickButton name="_action_Update"/>
+<clickLink label="Reservations"/>
+</webtest>
+
+	</target>
+</project>

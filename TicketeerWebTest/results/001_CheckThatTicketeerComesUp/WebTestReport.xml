@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<summary Implementation-Title="Canoo Webtest" Implementation-Version="R_1810">
+    <testresult endtime="Fri Oct 22 07:00:21 MDT 2010"
+        location="/Users/rick/NetBeansProjects/Ticketeer/TicketeerWebTest/tests/googleWebTest.xml:9: "
+        starttime="Fri Oct 22 07:00:15 MDT 2010" successful="no" testspecname="check that Ticketeer comes up">
+        <config>
+            <parameter name="port" value="80"/>
+            <parameter name="protocol" value="http"/>
+            <parameter name="host" value="localhost"/>
+            <parameter name="resultpath" value="/Users/rick/NetBeansProjects/Ticketeer/TicketeerWebTest/results"/>
+            <parameter name="saveprefix" value="response"/>
+            <parameter name="basepath" value="null"/>
+            <parameter name="resultfile" value="WebTestReport.xml"/>
+            <parameter name="haltonerror" value="no"/>
+            <parameter name="errorproperty" value="webtest.error"/>
+            <parameter name="browser" value="IE6"/>
+            <parameter name="saveresponse" value="yes"/>
+            <parameter name="haltonfailure" value="no"/>
+            <parameter name="failureproperty" value="webtest.failure"/>
+            <parameter name="autorefresh" value="false"/>
+            <parameter name="showhtmlparseroutput" value="yes"/>
+            <parameter name="timeout" value="300"/>
+        </config>
+        <results>
+            <step
+                _filename="/Users/rick/NetBeansProjects/Ticketeer/TicketeerWebTest/tests/googleWebTest.xml"
+                _line="10" description="Go to Ticketeer" duration="3553" result="completed" taskName="invoke">
+                <parameter name="url" value="http://localhost:8080/Ticketeer/"/>
+                <resultFile name="001_response_invoke.html"/>
+                <htmlparser>
+                    <error col="63" line="4" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                    <error col="92" line="5" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                    <error col="9" line="1" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                    <error col="108" line="1" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                    <error col="55" line="1" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                    <error col="30" line="1" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                    <warning col="32" line="1" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Element &lt;a&gt; not closed properly.</warning>
+                    <error col="141" line="7" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                    <error col="69" line="11" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                    <error col="37" line="12" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                    <error col="148" line="27" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                    <warning col="154" line="27" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="127" line="32" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                    <warning col="133" line="32" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="148" line="37" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                    <warning col="154" line="37" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="127" line="42" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                    <warning col="133" line="42" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="130" line="47" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                    <warning col="136" line="47" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="139" line="52" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                    <warning col="145" line="52" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="148" line="57" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                    <warning col="154" line="57" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="145" line="62" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                    <warning col="151" line="62" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="138" line="67" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                    <warning col="144" line="67" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="139" line="72" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                    <warning col="145" line="72" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="53" line="93" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                    <error col="73" line="99" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                    <error col="77" line="103" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                    <error col="69" line="107" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                    <error col="129" line="107" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                    <error col="69" line="113" url="http://localhost:8080/Ticketeer/auth/login?targetUri=%2F">Missing attribute name.</error>
+                </htmlparser>
+            </step>
+            <step
+                _filename="/Users/rick/NetBeansProjects/Ticketeer/TicketeerWebTest/tests/googleWebTest.xml"
+                _line="11" duration="11" result="completed" taskName="verifyTitle">
+                <parameter name="text" value="Login"/>
+            </step>
+            <step
+                _filename="/Users/rick/NetBeansProjects/Ticketeer/TicketeerWebTest/tests/googleWebTest.xml"
+                _line="12" duration="9" result="completed" taskName="setInputField">
+                <parameter name="name" value="username"/>
+                <parameter name="value" value="rrothenb@yahoo.com"/>
+            </step>
+            <step
+                _filename="/Users/rick/NetBeansProjects/Ticketeer/TicketeerWebTest/tests/googleWebTest.xml"
+                _line="13" description="Set password field password: bovine" duration="15"
+                result="completed" taskName="setInputField">
+                <parameter name="name" value="password"/>
+                <parameter name="value" value="bovine"/>
+            </step>
+            <step
+                _filename="/Users/rick/NetBeansProjects/Ticketeer/TicketeerWebTest/tests/googleWebTest.xml"
+                _line="14" duration="1815" result="completed" taskName="clickButton">
+                <parameter name="label" value="Sign in"/>
+                <resultFile name="002_response_clickButton.html"/>
+                <htmlparser>
+                    <error col="63" line="4" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="92" line="5" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="9" line="1" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="108" line="1" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="55" line="1" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="30" line="1" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <warning col="32" line="1" url="http://localhost:8080/Ticketeer/">Element &lt;a&gt; not closed properly.</warning>
+                    <error col="141" line="7" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="75" line="11" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="43" line="12" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="148" line="30" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <warning col="154" line="30" url="http://localhost:8080/Ticketeer/">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="127" line="35" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <warning col="133" line="35" url="http://localhost:8080/Ticketeer/">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="148" line="40" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <warning col="154" line="40" url="http://localhost:8080/Ticketeer/">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="127" line="45" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <warning col="133" line="45" url="http://localhost:8080/Ticketeer/">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="130" line="50" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <warning col="136" line="50" url="http://localhost:8080/Ticketeer/">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="139" line="55" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <warning col="145" line="55" url="http://localhost:8080/Ticketeer/">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="148" line="60" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <warning col="154" line="60" url="http://localhost:8080/Ticketeer/">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="145" line="65" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <warning col="151" line="65" url="http://localhost:8080/Ticketeer/">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="138" line="70" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <warning col="144" line="70" url="http://localhost:8080/Ticketeer/">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="139" line="75" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <warning col="145" line="75" url="http://localhost:8080/Ticketeer/">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="105" line="114" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="107" line="120" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="99" line="126" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="99" line="132" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="140" line="138" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="224" line="138" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="103" line="144" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="80" line="153" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="161" line="153" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="94" line="157" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <warning col="5" line="158" url="http://localhost:8080/Ticketeer/">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="73" line="160" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <warning col="5" line="161" url="http://localhost:8080/Ticketeer/">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="148" line="179" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="123" line="180" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="179" line="181" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="139" line="198" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="97" line="229" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <warning col="5" line="230" url="http://localhost:8080/Ticketeer/">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="76" line="232" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <warning col="5" line="233" url="http://localhost:8080/Ticketeer/">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="88" line="243" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="71" line="270" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="119" line="270" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="79" line="283" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="107" line="284" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="142" line="286" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="114" line="287" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="164" line="288" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="107" line="305" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="101" line="308" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <warning col="15" line="309" url="http://localhost:8080/Ticketeer/">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="99" line="313" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <warning col="15" line="314" url="http://localhost:8080/Ticketeer/">End element &lt;a&gt; automatically closes element &lt;span&gt;.</warning>
+                    <error col="88" line="323" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="179" line="337" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                    <error col="82" line="349" url="http://localhost:8080/Ticketeer/">Missing attribute name.</error>
+                </htmlparser>
+            </step>
+            <step
+                _filename="/Users/rick/NetBeansProjects/Ticketeer/TicketeerWebTest/tests/googleWebTest.xml"
+                _line="15" duration="1" result="completed" taskName="verifyTitle">
+                <parameter name="text" value="Create Reservation"/>
+            </step>
+            <step
+                _filename="/Users/rick/NetBeansProjects/Ticketeer/TicketeerWebTest/tests/googleWebTest.xml"
+                _line="16" duration="40" result="completed" taskName="setInputField">
+                <parameter name="name" value="customer"/>
+                <parameter name="value" value="je"/>
+            </step>
+            <step
+                _filename="/Users/rick/NetBeansProjects/Ticketeer/TicketeerWebTest/tests/googleWebTest.xml"
+                _line="17" duration="25" result="completed" taskName="setInputField">
+                <parameter name="htmlId" value="customer"/>
+                <parameter name="value" value="je"/>
+            </step>
+            <step
+                _filename="/Users/rick/NetBeansProjects/Ticketeer/TicketeerWebTest/tests/googleWebTest.xml"
+                _line="18" duration="26" result="completed" taskName="setInputField">
+                <parameter name="forLabel" value="Customer:"/>
+                <parameter name="value" value="je"/>
+            </step>
+            <step
+                _filename="/Users/rick/NetBeansProjects/Ticketeer/TicketeerWebTest/tests/googleWebTest.xml"
+                _line="19" duration="37" result="failed" taskName="clickLink">
+                <parameter name="label" value="Rothenberg, Jessa"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="setInputField">
+                <parameter name="name" value="notes"/>
+                <parameter name="value" value="This is a test"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="setInputField">
+                <parameter name="htmlId" value="notes"/>
+                <parameter name="value" value="This is a test"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="setInputField">
+                <parameter name="forLabel" value="Notes:"/>
+                <parameter name="value" value="This is a test"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="setCheckbox">
+                <parameter name="name" value="paid"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="setCheckbox">
+                <parameter name="htmlId" value="paid"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="setCheckbox">
+                <parameter name="forLabel" value="Paid:"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="clickButton">
+                <parameter name="label" value="Add Seats"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="clickButton">
+                <parameter name="label" value="Add Seats"/>
+                <parameter name="name" value="seats_add"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="clickButton">
+                <parameter name="htmlId" value="seats_add"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="clickButton">
+                <parameter name="name" value="seats_add"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="setInputField">
+                <parameter name="name" value="seats_0_quantity"/>
+                <parameter name="value" value="2"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="setInputField">
+                <parameter name="htmlId" value="seats_0_quantity"/>
+                <parameter name="value" value="2"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="clickButton">
+                <parameter name="label" value="Add Seats"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="clickButton">
+                <parameter name="label" value="Add Seats"/>
+                <parameter name="name" value="seats_add"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="clickButton">
+                <parameter name="htmlId" value="seats_add"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="clickButton">
+                <parameter name="name" value="seats_add"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="setInputField">
+                <parameter name="name" value="seats_1_quantity"/>
+                <parameter name="value" value="3"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="setInputField">
+                <parameter name="htmlId" value="seats_1_quantity"/>
+                <parameter name="value" value="3"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="clickButton">
+                <parameter name="label" value="Create"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="clickButton">
+                <parameter name="label" value="Create"/>
+                <parameter name="name" value=""/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="clickLink">
+                <parameter name="label" value="Rothenberg, Jessa"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="setCheckbox">
+                <parameter name="name" value="paid"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="setCheckbox">
+                <parameter name="htmlId" value="paid"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="setCheckbox">
+                <parameter name="forLabel" value="Paid:"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="setInputField">
+                <parameter name="name" value="notes"/>
+                <parameter name="value" value="This is a another test"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="setInputField">
+                <parameter name="htmlId" value="notes"/>
+                <parameter name="value" value="This is a another test"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="setInputField">
+                <parameter name="forLabel" value="Notes:"/>
+                <parameter name="value" value="This is a another test"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="setSelectField">
+                <parameter name="name" value="performance.id"/>
+                <parameter name="text" value="Carbuncle - Fri, 10/29/10 at 5:50 AM (0)"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="setSelectField">
+                <parameter name="htmlId" value="performance.id"/>
+                <parameter name="text" value="Carbuncle - Fri, 10/29/10 at 5:50 AM (0)"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="clickLink">
+                <parameter name="label" value=" "/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="setSelectField">
+                <parameter name="name" value="seats_0_price.id"/>
+                <parameter name="text" value="Carbuncle! ($10.00)"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="setSelectField">
+                <parameter name="htmlId" value="seats_0_price.id"/>
+                <parameter name="text" value="Carbuncle! ($10.00)"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="setInputField">
+                <parameter name="name" value="seats_0_quantity"/>
+                <parameter name="value" value="1"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="setInputField">
+                <parameter name="htmlId" value="seats_0_quantity"/>
+                <parameter name="value" value="1"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="clickButton">
+                <parameter name="label" value="Update"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="clickButton">
+                <parameter name="label" value="Update"/>
+                <parameter name="name" value="_action_Update"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="clickButton">
+                <parameter name="name" value="_action_Update"/>
+            </step>
+            <step duration="0" result="notexecuted" taskName="clickLink">
+                <parameter name="label" value="Reservations"/>
+            </step>
+            <failure currentResponse="http://localhost:8080/Ticketeer/" message="Link not found in page http://localhost:8080/Ticketeer/">
+                <antStack>
+                    <call
+                        filename="/Users/rick/NetBeansProjects/Ticketeer/TicketeerWebTest/tests/googleWebTest.xml" line="19"/>
+                </antStack>
+                <detail name="available links"><![CDATA[- label "Help" with url "/Ticketeer/help.gsp" and id ""
+- label "Reservations" with url "/Ticketeer/reservation" and id ""
+- label "Shows" with url "/Ticketeer/show" and id ""
+- label "Performances" with url "/Ticketeer/performance" and id ""
+- label "Sales" with url "/Ticketeer/sale" and id ""
+- label "Prices" with url "/Ticketeer/price" and id ""
+- label "Customers" with url "/Ticketeer/customer" and id ""
+- label "Transactions" with url "/Ticketeer/transaction" and id ""
+- label "Merchandise" with url "/Ticketeer/merchandise" and id ""
+- label "Tax Codes" with url "/Ticketeer/taxCode" and id ""
+- label "Registers" with url "/Ticketeer/register" and id ""
+- label "Theater" with url "/Ticketeer/theater/edit/1" and id ""
+- label "Login" with url "/Ticketeer/auth/login" and id ""
+- label "" with url "#" and id "customer_new"
+- label "" with url "" and id ""
+- label "" with url "#" and id "performance_new"
+- label "" with url "" and id ""
+- label "" with url "/Ticketeer/reservationItem/edit" and id ""
+- label "" with url "#" and id ""
+- label "" with url "" and id ""
+- label "" with url "" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+- label "" with url "#" and id ""
+]]></detail>
+            </failure>
+        </results>
+    </testresult>
+</summary>

@@ -1,0 +1,11 @@
+#;Method;URL;Response code;Response Message;Content Type;Duration
+1;GET;http://localhost:8080/Ticketeer/;302;Moved Temporarily;;98
+2;GET;http://localhost:8080/Ticketeer/auth/login?targetUri=%2F;200;OK;text/html;18
+3;GET;http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js;200;OK;text/javascript;556
+4;GET;http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js;200;OK;text/javascript;431
+5;GET;http://localhost:8080/Ticketeer/js/scaffolding.js;200;OK;text/javascript;5
+6;GET;http://localhost:8080/Ticketeer/css/main.css;200;OK;text/css;5
+7;GET;http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/themes/ui-lightness/jquery-ui.css;200;OK;text/css;184
+8;POST;http://localhost:8080/Ticketeer/auth/signIn;302;Moved Temporarily;;15
+9;GET;http://localhost:8080/Ticketeer/;200;OK;text/html;586
+10;GET;http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/themes/ui-lightness/jquery-ui.css;200;OK;text/css;141

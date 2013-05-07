@@ -1,0 +1,1 @@
+<%  out << Scaffolding.render(domainClass,property,domainInstance,cp) %>

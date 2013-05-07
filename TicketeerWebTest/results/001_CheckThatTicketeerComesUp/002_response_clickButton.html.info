@@ -1,0 +1,6 @@
+url=http://localhost:8080/Ticketeer/
+cookies=1
+cookie.0.name=JSESSIONID
+cookie.0.domain=localhost
+cookie.0.value=5BC718C1670691B87F97F30962166517
+cookie.0.path=/Ticketeer

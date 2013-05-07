@@ -1,0 +1,415 @@
+import org.codehaus.groovy.grails.orm.hibernate.support.ClosureEventTriggeringInterceptor as Events
+import org.codehaus.groovy.grails.commons.GrailsDomainClass
+import org.codehaus.groovy.grails.scaffolding.DomainClassPropertyComparator
+import javax.servlet.http.Cookie
+import grails.converters.JSON
+
+class ShowController {
+
+    static Map features = [hasFilterableDate:false, hasFilterableStrings:true, defaultSortField:'name', filterableStrings:['name'], specialSortFields:[]]
+
+
+    def index = { redirect(action:list,params:params) }
+
+    // the delete, save and update actions only accept POST requests
+    static allowedMethods = [delete:'POST', save:'POST', update:'POST']
+
+    // TODO - try making a search params map that I manipulate specifically for doing the search
+    // TODO - fix this shit.  this is so fucked up.  I don't know what the fuck I'm doing
+    // TODO - I should totally rewrite this piece of shit
+    // cool.  I'm doing this remotely! So how should this work?
+    // TODO - should allow both filtering by date and string if appropriate
+    def list = {
+        log.info "list - $params"
+        if (!session.max) {
+            def cookie = request.cookies.find {it.name == "maxListSize"}
+            log.info "cookie - $cookie"
+            if (cookie) {
+                session.max = cookie.value
+            }
+            else {
+                session.max = 10;
+            }
+        }
+        int defaultMax = session.max.toInteger()
+        if (params.max) {
+            Cookie cookie = new Cookie('maxListSize',params.max)
+            cookie.maxAge = 60*60*24*90
+            response.addCookie(cookie)
+            session.max = params.max
+        }
+        log.info "list - features: ${features}"
+        boolean sortFieldSpecialCase = features.specialSortFields.contains(params.sort)
+        params.max = Math.min( params.max ? params.max.toInteger() : defaultMax,  100)
+        if(!params.when) params.when = "Future"
+        if(!params.order) params.order = "asc"
+        if(!params.sort) params.sort = features.defaultSortField
+        if(!params.offset) params.offset = 0
+        boolean allSelected = params.when == "All"
+        boolean futureSelected = params.when == "Future"
+        boolean pastSelected = params.when == "Past"
+        Map shownParams = [:]
+        shownParams.putAll(params)
+        if (shownParams?.offset == 0) {
+            shownParams.remove("offset")
+        }
+        if (shownParams?.order == "asc") {
+            shownParams.remove("order")
+        }
+        shownParams.remove("max")
+        if (shownParams?.when == "Future") {
+            shownParams.remove("when")
+        }
+        Map searchParams = [:]
+        searchParams.putAll(params)
+        if (sortFieldSpecialCase) {
+            searchParams.remove('sort')
+            searchParams.remove('max')
+            searchParams.remove('offset')
+            // must also clear the max and offset
+            // also, would be better to completely remove the sort rather than change to default
+        }
+        if (shownParams?.sort == features.defaultSortField) {
+            shownParams.remove("sort")
+        }
+        log.info "list - shownParams - $shownParams"
+        log.info "list - params - $params"
+        List queryParameters = []
+        boolean showDateFilter =  features.hasFilterableDate
+        boolean showStringFilter = features.hasFilterableStrings
+        String query = "from Show "
+        if (showDateFilter) {
+            if (futureSelected) {
+                query += "where ${features.defaultSortField} > ? "
+                queryParameters.add(new Date() - 1)
+            }
+            else if (pastSelected) {
+                query += "where ${features.defaultSortField} < ? "
+                queryParameters.add(new Date() + 1)
+            }
+        }
+        log.info "list - query: '$query'"
+        if (showStringFilter && params.filter) {
+            if (showDateFilter && (futureSelected || pastSelected)) {
+                query += "and ("
+            }
+            else {
+                query += "where "
+            }
+            log.info "list - query: '$query', filterableStrings: ${features.filterableStrings}"
+            query +=
+                features.filterableStrings.collect{"lower($it) like lower('%${params.filter}%') "}.join(' or ')
+            log.info "list - query: '$query'"
+            if (showDateFilter && (futureSelected || pastSelected)) {
+                query += ") "
+            }
+        }
+        def numEntries = Show.executeQuery( "select count(*) " + query, queryParameters)[0]
+        def list
+        if (sortFieldSpecialCase) {
+            list = Show.findAll(query, queryParameters)
+        }
+        else {
+            list = Show.findAll(query + "order by ${params.sort} ${params.order}",
+                                        queryParameters,
+                                        [max:params.max, offset:params.offset?.toInteger()])
+        }
+        // initial query to get numEntries does not need sort
+        log.info "list - query: '$query', queryParameters: ${queryParameters}, numEntries: $numEntries"
+        //def list = Show.list( searchParams )
+        //def numEntries = Show.count()
+        // This seems to depend on defaultSortField being the date field which may not be true, although
+        // it probably should be.  This code may support the dot notation as is.
+        //  Probably need to have a new var that is the filterableDate (as is being used elsewhere)
+        /*
+        if (showDateFilter) {
+            if (futureSelected) {
+                def c = Show.createCriteria()
+                list = c {
+                    gt(features.defaultSortField,new Date()-1)
+                }
+                numEntries = list.size()
+                c = Show.createCriteria()
+                list = c {
+                    gt(features.defaultSortField,new Date()-1)
+                    if (!sortFieldSpecialCase) {
+                        maxResults(params.max)
+                        firstResult(params.offset?.toInteger())
+                        order(params.sort, params.order)
+                    }
+                }
+            }
+            else if (pastSelected) {
+                def c = Show.createCriteria()
+                list = c {
+                    lt(features.defaultSortField,new Date()+1)
+                }
+                numEntries = list.size()
+                c = Show.createCriteria()
+                list = c {
+                    lt(features.defaultSortField,new Date()+1)
+                    if (!sortFieldSpecialCase) {
+                        maxResults(params.max)
+                        firstResult(params.offset?.toInteger())
+                        order(params.sort, params.order)
+                    }
+                }
+            }
+        }
+       // TODO use toStringFields, allow use when also date filtering, use HQL (lower(name) like lower('%cats%') or ...)
+        if (showStringFilter && params.filter) {
+            def c = Show.createCriteria()
+            list = c {
+                or {
+                    features.filterableStrings.each {
+                        ilike(it,params.filter + "%")
+                    }
+                }
+            }
+            numEntries = list.size()
+            c = Show.createCriteria()
+            list = c {
+                or {
+                    features.filterableStrings.each {
+                        ilike(it,params.filter + "%")
+                    }
+                }
+                if (!sortFieldSpecialCase) {
+                    maxResults(params.max)
+                    firstResult(params.offset?.toInteger())
+                    order(params.sort, params.order)
+                }
+            }
+        }
+                */
+
+        if (sortFieldSpecialCase) {
+            list.sort { a,b ->
+                params.order == "asc" ? a[params.sort].compareTo(b[params.sort]) : b[params.sort].compareTo(a[params.sort])
+            }
+            list = list[params.offset.toInteger()..Math.min(params.offset.toInteger()+params.max.toInteger()-1,list.size-1)]
+        }
+        [ showInstanceList: list,
+          showInstanceTotal: numEntries,
+          'allSelected': allSelected,
+          'pastSelected': pastSelected,
+          'futureSelected': futureSelected,
+          'showDateFilter' : showDateFilter,
+          'showStringFilter' : showStringFilter,
+          'shownParams' : shownParams]
+    }
+
+    def show = {
+        log.info "show - $params"
+        def showInstance = Show.get( params.id )
+
+        if(!showInstance) {
+            flash.error = "Show not found with id ${params.id}"
+            redirect(action:list)
+        }
+        else { return [ showInstance : showInstance ] }
+    }
+
+    def print = {
+        log.info "print - $params"
+        def showInstance = Show.get( params.id )
+
+        if(!showInstance) {
+            flash.error = "Show not found with id ${params.id}"
+            redirect(action:list)
+        }
+        else { return [ showInstance : showInstance ] }
+    }
+
+    def delete = {
+        log.info "delete - $params"
+        def showInstance = Show.get( params.id )
+        if(showInstance) {
+            try {
+                showInstance.delete(flush:true)
+                flash.message = "Show ${params.id} deleted"
+                redirect(action:list)
+            }
+            catch(org.springframework.dao.DataIntegrityViolationException e) {
+                flash.error = "Show ${params.id} could not be deleted"
+                redirect(action:show,id:params.id)
+            }
+        }
+        else {
+            flash.error = "Show not found with id ${params.id}"
+            redirect(action:list)
+        }
+    }
+
+    def edit = {
+        log.info "edit - $params"
+        GrailsDomainClass domainClass = grailsApplication.getArtefact("Domain", "Show")
+        DomainClassPropertyComparator comparator = new DomainClassPropertyComparator(domainClass)
+        def excludedProps = ['version',
+                             'id',
+                             Events.ONLOAD_EVENT,
+                             Events.BEFORE_DELETE_EVENT,
+                             Events.BEFORE_INSERT_EVENT,
+                             Events.BEFORE_UPDATE_EVENT]
+
+        def props = domainClass.properties.findAll { !excludedProps.contains(it.name)}
+        Collections.sort(props, comparator)
+        def oneToManys = []
+        def manyToOnes = []
+        props.eachWithIndex { p,i ->
+            if (p.oneToMany) {
+                oneToManys.add(p)
+            }
+            else if (p.manyToOne || p.oneToOne) {
+                manyToOnes.add(p)
+            }
+        }
+        def showInstance = Show.get( params.id )
+
+        if(!showInstance) {
+            flash.error = "Show not found with id ${params.id}"
+            redirect(action:list)
+        }
+        else {
+            return [ showInstance : showInstance, 'oneToManys': oneToManys, 'manyToOnes': manyToOnes ]
+        }
+    }
+
+    def update = {
+        log.info "update - $params"
+        GrailsDomainClass domainClass = grailsApplication.getArtefact("Domain", "Show")
+        def showInstance = Show.get( params.id )
+        if(showInstance) {
+            if(params.version) {
+                def version = params.version.toLong()
+                if(showInstance.version > version) {
+                    
+                    showInstance.errors.rejectValue("version", "show.optimistic.locking.failure", "Another user has updated this Show while you were editing.")
+                    render(view:'edit',model:[showInstance:showInstance])
+                    return
+                }
+            }
+            //showInstance.properties = fixedParams
+            Scaffolding.setFromParams(domainClass,showInstance,params)
+            if(!showInstance.hasErrors() && showInstance.save()) {
+                flash.message = "Show updated"
+                redirect(action:'edit',id:showInstance.id)
+            }
+            else {
+                render(view:'edit',model:[showInstance:showInstance])
+            }
+        }
+        else {
+            flash.error = "Show not found with id ${params.id}"
+            redirect(action:list)
+        }
+    }
+
+    def create = {
+        log.info "create - $params"
+        log.info "create - referer: ${request.getHeader('referer')}"
+        log.info "create - $flash"
+        if (!request.getHeader('referer') ==~ /auth\/login/) {
+            session.referer = request.getHeader('referer')
+        }
+        def showInstance = new Show()
+        if (flash.showInstance) {
+            showInstance = flash.showInstance
+            log.info "create - got from flash - ${showInstance.errors}"
+        }
+        else {
+            showInstance.properties = params
+        }
+        return ['showInstance':showInstance]
+    }
+
+    def save = {
+        log.info "save - $params"
+        log.info "save - session.referer: ${session.referer}"
+        log.info "save - $flash"
+        GrailsDomainClass domainClass = grailsApplication.getArtefact("Domain", "Show")
+        def showInstance = new Show()
+        Scaffolding.setFromParams(domainClass,showInstance,params)
+        if(showInstance.hasErrors()) {
+            //render(view:'create',model:[showInstance:showInstance])
+            flash.showInstance = showInstance
+            log.info "save - updated - $flash"
+            redirect(action:create)
+            return
+        }
+        
+        if(showInstance.save()) {
+            flash.message = "Show created"
+            if (session.referer) {
+                redirect(url:session.referer)
+            }
+            else {
+                redirect(action:list)
+            }
+        }
+        else {
+            //render(view:'create',model:[showInstance:showInstance])
+            flash.showInstance = showInstance
+            log.info "save - updated - $flash"
+            redirect(action:create)
+        }
+    }
+
+    def ajaxSearch = {
+        log.info "ajaxSearch - " + params
+        def jsonList = []
+        Show.list().sort().each {
+            if (!params.term || it.toString().toLowerCase().contains(params.term.toLowerCase())) {
+                jsonList.add([ id: it.id, value: it.toString() ])
+            }
+        }
+        render jsonList as JSON
+    }
+
+    def ajaxSave = {
+        log.info "ajaxSave - $params"
+        def showInstance = new Show(params)
+        boolean status = showInstance.save(flush: true);
+        log.info "id: ${showInstance.id}, name: ${showInstance.toString()}, status: $status"
+        if (showInstance.hasErrors()) {
+            showInstance.errors.each {
+                log.info it
+            }
+        }
+        def response = [:]
+        response.display = showInstance.toString()
+        response.id = showInstance.id
+        render response as JSON
+    }
+
+    def ajaxCalculateDependents = {
+        log.info "ajaxCalculateDependents - $params"
+        GrailsDomainClass domainClass = grailsApplication.getArtefact("Domain", "Show")
+        def showInstance
+        if (params.id) {
+            showInstance = Show.get( params.id )
+        }
+        else {
+            showInstance = new Show()
+        }
+        Scaffolding.setFromParams(domainClass,showInstance,params)
+        def response = [:]
+        
+        render response as JSON
+    }
+
+    def ajaxAddOneToMany = {
+        log.info "ajaxAddOneToMany - $params"
+        GrailsDomainClass domainClass = grailsApplication.getArtefact("Domain", "Show")
+        def showInstance
+        if (params.id) {
+            showInstance = Show.get( params.id )
+        }
+        else {
+            showInstance = new Show()
+        }
+        Scaffolding.setFromParams(domainClass,showInstance,params)
+        def response = Scaffolding.createNew(domainClass,params.field,showInstance)
+        render response as JSON
+    }
+}

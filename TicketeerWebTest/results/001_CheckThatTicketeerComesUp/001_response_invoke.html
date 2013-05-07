@@ -1,0 +1,120 @@
+<html>
+    <head>
+        <title>Login</title>
+        <link rel="stylesheet" href="/Ticketeer/css/main.css" />
+        <link rel="shortcut icon" href="/Ticketeer/images/favicon.ico" type="image/x-icon" />
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet" />
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/Ticketeer/js/scaffolding.js"></script>
+        
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="layout" content="main"/>
+  
+
+    </head>
+    <body class="ui-helper-reset">
+                <div class="ui-widget tabs">
+                    <table class="ui-state-default">
+                        <tbody>
+                            <tr class="ui-state-default">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/help.gsp">Help</a>
+                                </td>
+                            </tr>
+                            <tr class="ui-state-default">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/reservation">Reservations<span class="ui-icon ui-icon-plus" title="Create a new Reservation" /></a>
+                                </td>
+                            </tr>
+                            <tr class="ui-state-default">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/show">Shows<span class="ui-icon ui-icon-plus" title="Create a new Show" /></a>
+                                </td>
+                            </tr>
+                            <tr class="ui-state-default">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/performance">Performances<span class="ui-icon ui-icon-plus" title="Create a new Performance" /></a>
+                                </td>
+                            </tr>
+                            <tr class="ui-state-default">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/sale">Sales<span class="ui-icon ui-icon-plus" title="Create a new Sale" /></a>
+                                </td>
+                            </tr>
+                            <tr class="ui-state-default">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/price">Prices<span class="ui-icon ui-icon-plus" title="Create a new Price" /></a>
+                                </td>
+                            </tr>
+                            <tr class="ui-state-default">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/customer">Customers<span class="ui-icon ui-icon-plus" title="Create a new Customer" /></a>
+                                </td>
+                            </tr>
+                                <tr class="ui-state-default">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/transaction">Transactions<span class="ui-icon ui-icon-plus" title="Create a new Transaction" /></a>
+                                </td>
+                            </tr>
+                            <tr class="ui-state-default">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/merchandise">Merchandise<span class="ui-icon ui-icon-plus" title="Create new Merchandise" /></a>
+                                </td>
+                            </tr>
+                            <tr class="ui-state-default">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/taxCode">Tax Codes<span class="ui-icon ui-icon-plus" title="Create a new Tax Code" /></a>
+                                </td>
+                            </tr>
+                            <tr class="ui-state-default">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/register">Registers<span class="ui-icon ui-icon-plus" title="Create a new Register" /></a>
+                                </td>
+                            </tr>
+                            <tr class="ui-state-default">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/theater/edit/1">Theater</a>
+                                </td>
+                            </tr>
+                            <tr class="ui-state-active">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/auth/login">Login</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+        
+  <div class="body ui-widget ui-helper-reset">
+  
+  <form action="/Ticketeer/auth/signIn" method="post" >
+    <input type="hidden" name="targetUri" value="/" />
+    <div class="main dialog">
+    <table class="ui-widget-content">
+      <tbody>
+        <tr class="prop">
+          <td valign="top" class="name"><label for="username">Username:</label></td>
+          <td class="value"><input type="text" name="username" value="" /></td>
+        </tr>
+        <tr class="prop">
+          <td valign="top" class="name"><label for="password">Password:</label></td>
+          <td class="value"><input type="password" name="password" value="" /></td>
+        </tr>
+        <tr class="prop">
+          <td valign="top" class="name"><label for="rememberMe">Remember me?:</label></td>
+          <td class="value"><input type="hidden" name="_rememberMe" /><input type="checkbox" name="rememberMe" id="rememberMe"  /></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="action ui-widget-header">
+      <input class="ui-state-default" type="submit" value="Sign in" />
+    </div>
+  </form>
+  </div>
+
+        
+  </body>
+</html>

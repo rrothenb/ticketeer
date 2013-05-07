@@ -1,0 +1,415 @@
+import org.codehaus.groovy.grails.orm.hibernate.support.ClosureEventTriggeringInterceptor as Events
+import org.codehaus.groovy.grails.commons.GrailsDomainClass
+import org.codehaus.groovy.grails.scaffolding.DomainClassPropertyComparator
+import javax.servlet.http.Cookie
+import grails.converters.JSON
+
+class TheaterController {
+
+    static Map features = [hasFilterableDate:false, hasFilterableStrings:false, defaultSortField:'defaultPrice.defaultPrice.name', filterableStrings:[], specialSortFields:[]]
+
+
+    def index = { redirect(action:list,params:params) }
+
+    // the delete, save and update actions only accept POST requests
+    static allowedMethods = [delete:'POST', save:'POST', update:'POST']
+
+    // TODO - try making a search params map that I manipulate specifically for doing the search
+    // TODO - fix this shit.  this is so fucked up.  I don't know what the fuck I'm doing
+    // TODO - I should totally rewrite this piece of shit
+    // cool.  I'm doing this remotely! So how should this work?
+    // TODO - should allow both filtering by date and string if appropriate
+    def list = {
+        log.info "list - $params"
+        if (!session.max) {
+            def cookie = request.cookies.find {it.name == "maxListSize"}
+            log.info "cookie - $cookie"
+            if (cookie) {
+                session.max = cookie.value
+            }
+            else {
+                session.max = 10;
+            }
+        }
+        int defaultMax = session.max.toInteger()
+        if (params.max) {
+            Cookie cookie = new Cookie('maxListSize',params.max)
+            cookie.maxAge = 60*60*24*90
+            response.addCookie(cookie)
+            session.max = params.max
+        }
+        log.info "list - features: ${features}"
+        boolean sortFieldSpecialCase = features.specialSortFields.contains(params.sort)
+        params.max = Math.min( params.max ? params.max.toInteger() : defaultMax,  100)
+        if(!params.when) params.when = "Future"
+        if(!params.order) params.order = "asc"
+        if(!params.sort) params.sort = features.defaultSortField
+        if(!params.offset) params.offset = 0
+        boolean allSelected = params.when == "All"
+        boolean futureSelected = params.when == "Future"
+        boolean pastSelected = params.when == "Past"
+        Map shownParams = [:]
+        shownParams.putAll(params)
+        if (shownParams?.offset == 0) {
+            shownParams.remove("offset")
+        }
+        if (shownParams?.order == "asc") {
+            shownParams.remove("order")
+        }
+        shownParams.remove("max")
+        if (shownParams?.when == "Future") {
+            shownParams.remove("when")
+        }
+        Map searchParams = [:]
+        searchParams.putAll(params)
+        if (sortFieldSpecialCase) {
+            searchParams.remove('sort')
+            searchParams.remove('max')
+            searchParams.remove('offset')
+            // must also clear the max and offset
+            // also, would be better to completely remove the sort rather than change to default
+        }
+        if (shownParams?.sort == features.defaultSortField) {
+            shownParams.remove("sort")
+        }
+        log.info "list - shownParams - $shownParams"
+        log.info "list - params - $params"
+        List queryParameters = []
+        boolean showDateFilter =  features.hasFilterableDate
+        boolean showStringFilter = features.hasFilterableStrings
+        String query = "from Theater "
+        if (showDateFilter) {
+            if (futureSelected) {
+                query += "where ${features.defaultSortField} > ? "
+                queryParameters.add(new Date() - 1)
+            }
+            else if (pastSelected) {
+                query += "where ${features.defaultSortField} < ? "
+                queryParameters.add(new Date() + 1)
+            }
+        }
+        log.info "list - query: '$query'"
+        if (showStringFilter && params.filter) {
+            if (showDateFilter && (futureSelected || pastSelected)) {
+                query += "and ("
+            }
+            else {
+                query += "where "
+            }
+            log.info "list - query: '$query', filterableStrings: ${features.filterableStrings}"
+            query +=
+                features.filterableStrings.collect{"lower($it) like lower('%${params.filter}%') "}.join(' or ')
+            log.info "list - query: '$query'"
+            if (showDateFilter && (futureSelected || pastSelected)) {
+                query += ") "
+            }
+        }
+        def numEntries = Theater.executeQuery( "select count(*) " + query, queryParameters)[0]
+        def list
+        if (sortFieldSpecialCase) {
+            list = Theater.findAll(query, queryParameters)
+        }
+        else {
+            list = Theater.findAll(query + "order by ${params.sort} ${params.order}",
+                                        queryParameters,
+                                        [max:params.max, offset:params.offset?.toInteger()])
+        }
+        // initial query to get numEntries does not need sort
+        log.info "list - query: '$query', queryParameters: ${queryParameters}, numEntries: $numEntries"
+        //def list = Theater.list( searchParams )
+        //def numEntries = Theater.count()
+        // This seems to depend on defaultSortField being the date field which may not be true, although
+        // it probably should be.  This code may support the dot notation as is.
+        //  Probably need to have a new var that is the filterableDate (as is being used elsewhere)
+        /*
+        if (showDateFilter) {
+            if (futureSelected) {
+                def c = Theater.createCriteria()
+                list = c {
+                    gt(features.defaultSortField,new Date()-1)
+                }
+                numEntries = list.size()
+                c = Theater.createCriteria()
+                list = c {
+                    gt(features.defaultSortField,new Date()-1)
+                    if (!sortFieldSpecialCase) {
+                        maxResults(params.max)
+                        firstResult(params.offset?.toInteger())
+                        order(params.sort, params.order)
+                    }
+                }
+            }
+            else if (pastSelected) {
+                def c = Theater.createCriteria()
+                list = c {
+                    lt(features.defaultSortField,new Date()+1)
+                }
+                numEntries = list.size()
+                c = Theater.createCriteria()
+                list = c {
+                    lt(features.defaultSortField,new Date()+1)
+                    if (!sortFieldSpecialCase) {
+                        maxResults(params.max)
+                        firstResult(params.offset?.toInteger())
+                        order(params.sort, params.order)
+                    }
+                }
+            }
+        }
+       // TODO use toStringFields, allow use when also date filtering, use HQL (lower(name) like lower('%cats%') or ...)
+        if (showStringFilter && params.filter) {
+            def c = Theater.createCriteria()
+            list = c {
+                or {
+                    features.filterableStrings.each {
+                        ilike(it,params.filter + "%")
+                    }
+                }
+            }
+            numEntries = list.size()
+            c = Theater.createCriteria()
+            list = c {
+                or {
+                    features.filterableStrings.each {
+                        ilike(it,params.filter + "%")
+                    }
+                }
+                if (!sortFieldSpecialCase) {
+                    maxResults(params.max)
+                    firstResult(params.offset?.toInteger())
+                    order(params.sort, params.order)
+                }
+            }
+        }
+                */
+
+        if (sortFieldSpecialCase) {
+            list.sort { a,b ->
+                params.order == "asc" ? a[params.sort].compareTo(b[params.sort]) : b[params.sort].compareTo(a[params.sort])
+            }
+            list = list[params.offset.toInteger()..Math.min(params.offset.toInteger()+params.max.toInteger()-1,list.size-1)]
+        }
+        [ theaterInstanceList: list,
+          theaterInstanceTotal: numEntries,
+          'allSelected': allSelected,
+          'pastSelected': pastSelected,
+          'futureSelected': futureSelected,
+          'showDateFilter' : showDateFilter,
+          'showStringFilter' : showStringFilter,
+          'shownParams' : shownParams]
+    }
+
+    def show = {
+        log.info "show - $params"
+        def theaterInstance = Theater.get( params.id )
+
+        if(!theaterInstance) {
+            flash.error = "Theater not found with id ${params.id}"
+            redirect(action:list)
+        }
+        else { return [ theaterInstance : theaterInstance ] }
+    }
+
+    def print = {
+        log.info "print - $params"
+        def theaterInstance = Theater.get( params.id )
+
+        if(!theaterInstance) {
+            flash.error = "Theater not found with id ${params.id}"
+            redirect(action:list)
+        }
+        else { return [ theaterInstance : theaterInstance ] }
+    }
+
+    def delete = {
+        log.info "delete - $params"
+        def theaterInstance = Theater.get( params.id )
+        if(theaterInstance) {
+            try {
+                theaterInstance.delete(flush:true)
+                flash.message = "Theater ${params.id} deleted"
+                redirect(action:list)
+            }
+            catch(org.springframework.dao.DataIntegrityViolationException e) {
+                flash.error = "Theater ${params.id} could not be deleted"
+                redirect(action:show,id:params.id)
+            }
+        }
+        else {
+            flash.error = "Theater not found with id ${params.id}"
+            redirect(action:list)
+        }
+    }
+
+    def edit = {
+        log.info "edit - $params"
+        GrailsDomainClass domainClass = grailsApplication.getArtefact("Domain", "Theater")
+        DomainClassPropertyComparator comparator = new DomainClassPropertyComparator(domainClass)
+        def excludedProps = ['version',
+                             'id',
+                             Events.ONLOAD_EVENT,
+                             Events.BEFORE_DELETE_EVENT,
+                             Events.BEFORE_INSERT_EVENT,
+                             Events.BEFORE_UPDATE_EVENT]
+
+        def props = domainClass.properties.findAll { !excludedProps.contains(it.name)}
+        Collections.sort(props, comparator)
+        def oneToManys = []
+        def manyToOnes = []
+        props.eachWithIndex { p,i ->
+            if (p.oneToMany) {
+                oneToManys.add(p)
+            }
+            else if (p.manyToOne || p.oneToOne) {
+                manyToOnes.add(p)
+            }
+        }
+        def theaterInstance = Theater.get( params.id )
+
+        if(!theaterInstance) {
+            flash.error = "Theater not found with id ${params.id}"
+            redirect(action:list)
+        }
+        else {
+            return [ theaterInstance : theaterInstance, 'oneToManys': oneToManys, 'manyToOnes': manyToOnes ]
+        }
+    }
+
+    def update = {
+        log.info "update - $params"
+        GrailsDomainClass domainClass = grailsApplication.getArtefact("Domain", "Theater")
+        def theaterInstance = Theater.get( params.id )
+        if(theaterInstance) {
+            if(params.version) {
+                def version = params.version.toLong()
+                if(theaterInstance.version > version) {
+                    
+                    theaterInstance.errors.rejectValue("version", "theater.optimistic.locking.failure", "Another user has updated this Theater while you were editing.")
+                    render(view:'edit',model:[theaterInstance:theaterInstance])
+                    return
+                }
+            }
+            //theaterInstance.properties = fixedParams
+            Scaffolding.setFromParams(domainClass,theaterInstance,params)
+            if(!theaterInstance.hasErrors() && theaterInstance.save()) {
+                flash.message = "Theater updated"
+                redirect(action:'edit',id:theaterInstance.id)
+            }
+            else {
+                render(view:'edit',model:[theaterInstance:theaterInstance])
+            }
+        }
+        else {
+            flash.error = "Theater not found with id ${params.id}"
+            redirect(action:list)
+        }
+    }
+
+    def create = {
+        log.info "create - $params"
+        log.info "create - referer: ${request.getHeader('referer')}"
+        log.info "create - $flash"
+        if (!request.getHeader('referer') ==~ /auth\/login/) {
+            session.referer = request.getHeader('referer')
+        }
+        def theaterInstance = new Theater()
+        if (flash.theaterInstance) {
+            theaterInstance = flash.theaterInstance
+            log.info "create - got from flash - ${theaterInstance.errors}"
+        }
+        else {
+            theaterInstance.properties = params
+        }
+        return ['theaterInstance':theaterInstance]
+    }
+
+    def save = {
+        log.info "save - $params"
+        log.info "save - session.referer: ${session.referer}"
+        log.info "save - $flash"
+        GrailsDomainClass domainClass = grailsApplication.getArtefact("Domain", "Theater")
+        def theaterInstance = new Theater()
+        Scaffolding.setFromParams(domainClass,theaterInstance,params)
+        if(theaterInstance.hasErrors()) {
+            //render(view:'create',model:[theaterInstance:theaterInstance])
+            flash.theaterInstance = theaterInstance
+            log.info "save - updated - $flash"
+            redirect(action:create)
+            return
+        }
+        
+        if(theaterInstance.save()) {
+            flash.message = "Theater created"
+            if (session.referer) {
+                redirect(url:session.referer)
+            }
+            else {
+                redirect(action:list)
+            }
+        }
+        else {
+            //render(view:'create',model:[theaterInstance:theaterInstance])
+            flash.theaterInstance = theaterInstance
+            log.info "save - updated - $flash"
+            redirect(action:create)
+        }
+    }
+
+    def ajaxSearch = {
+        log.info "ajaxSearch - " + params
+        def jsonList = []
+        Theater.list().sort().each {
+            if (!params.term || it.toString().toLowerCase().contains(params.term.toLowerCase())) {
+                jsonList.add([ id: it.id, value: it.toString() ])
+            }
+        }
+        render jsonList as JSON
+    }
+
+    def ajaxSave = {
+        log.info "ajaxSave - $params"
+        def theaterInstance = new Theater(params)
+        boolean status = theaterInstance.save(flush: true);
+        log.info "id: ${theaterInstance.id}, name: ${theaterInstance.toString()}, status: $status"
+        if (theaterInstance.hasErrors()) {
+            theaterInstance.errors.each {
+                log.info it
+            }
+        }
+        def response = [:]
+        response.display = theaterInstance.toString()
+        response.id = theaterInstance.id
+        render response as JSON
+    }
+
+    def ajaxCalculateDependents = {
+        log.info "ajaxCalculateDependents - $params"
+        GrailsDomainClass domainClass = grailsApplication.getArtefact("Domain", "Theater")
+        def theaterInstance
+        if (params.id) {
+            theaterInstance = Theater.get( params.id )
+        }
+        else {
+            theaterInstance = new Theater()
+        }
+        Scaffolding.setFromParams(domainClass,theaterInstance,params)
+        def response = [:]
+        
+        render response as JSON
+    }
+
+    def ajaxAddOneToMany = {
+        log.info "ajaxAddOneToMany - $params"
+        GrailsDomainClass domainClass = grailsApplication.getArtefact("Domain", "Theater")
+        def theaterInstance
+        if (params.id) {
+            theaterInstance = Theater.get( params.id )
+        }
+        else {
+            theaterInstance = new Theater()
+        }
+        Scaffolding.setFromParams(domainClass,theaterInstance,params)
+        def response = Scaffolding.createNew(domainClass,params.field,theaterInstance)
+        render response as JSON
+    }
+}

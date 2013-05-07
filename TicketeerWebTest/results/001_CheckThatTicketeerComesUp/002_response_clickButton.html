@@ -1,0 +1,385 @@
+<html>
+    <head>
+        <title>Create Reservation</title>
+        <link rel="stylesheet" href="/Ticketeer/css/main.css" />
+        <link rel="shortcut icon" href="/Ticketeer/images/favicon.ico" type="image/x-icon" />
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet" />
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/Ticketeer/js/scaffolding.js"></script>
+        
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="layout" content="main"/>
+        
+        <script>
+          baseUrl = "/Ticketeer";
+        </script>
+    
+    </head>
+    <body class="ui-helper-reset">
+                <div class="ui-widget tabs">
+                    <table class="ui-state-default">
+                        <tbody>
+                            <tr class="ui-state-default">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/help.gsp">Help</a>
+                                </td>
+                            </tr>
+                            <tr class="ui-state-active">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/reservation">Reservations<span class="ui-icon ui-icon-plus" title="Create a new Reservation" /></a>
+                                </td>
+                            </tr>
+                            <tr class="ui-state-default">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/show">Shows<span class="ui-icon ui-icon-plus" title="Create a new Show" /></a>
+                                </td>
+                            </tr>
+                            <tr class="ui-state-default">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/performance">Performances<span class="ui-icon ui-icon-plus" title="Create a new Performance" /></a>
+                                </td>
+                            </tr>
+                            <tr class="ui-state-default">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/sale">Sales<span class="ui-icon ui-icon-plus" title="Create a new Sale" /></a>
+                                </td>
+                            </tr>
+                            <tr class="ui-state-default">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/price">Prices<span class="ui-icon ui-icon-plus" title="Create a new Price" /></a>
+                                </td>
+                            </tr>
+                            <tr class="ui-state-default">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/customer">Customers<span class="ui-icon ui-icon-plus" title="Create a new Customer" /></a>
+                                </td>
+                            </tr>
+                                <tr class="ui-state-default">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/transaction">Transactions<span class="ui-icon ui-icon-plus" title="Create a new Transaction" /></a>
+                                </td>
+                            </tr>
+                            <tr class="ui-state-default">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/merchandise">Merchandise<span class="ui-icon ui-icon-plus" title="Create new Merchandise" /></a>
+                                </td>
+                            </tr>
+                            <tr class="ui-state-default">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/taxCode">Tax Codes<span class="ui-icon ui-icon-plus" title="Create a new Tax Code" /></a>
+                                </td>
+                            </tr>
+                            <tr class="ui-state-default">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/register">Registers<span class="ui-icon ui-icon-plus" title="Create a new Register" /></a>
+                                </td>
+                            </tr>
+                            <tr class="ui-state-default">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/theater/edit/1">Theater</a>
+                                </td>
+                            </tr>
+                            <tr class="ui-state-default">
+                                <td valign="middle">
+                                  <a href="/Ticketeer/auth/login">Login</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+        
+        <div class="body ui-widget ui-helper-reset">
+            
+            
+            
+            <form action="/Ticketeer/reservation/save" method="post" >
+                <div class="main dialog">
+                    <table class="ui-widget-content">
+                        <tbody>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="customer">Customer:</label>
+                                </td>
+                                <td valign="middle" class="value ">
+                                    <div id="customer_new_dialog" title="Create New Customer" style="display:none;">
+  <table>
+    <tbody>
+      <tr>
+        <td title="">
+          <label for="customer_new_lastName">Last Name:</label>
+        </td>
+        <td title=""><input type="text" id="customer_new_lastName" name="customer_new_lastName" value=""/></td>
+      </tr>
+      <tr>
+        <td title="">
+          <label for="customer_new_firstName">First Name:</label>
+        </td>
+        <td title=""><input type="text" id="customer_new_firstName" name="customer_new_firstName" value=""/></td>
+      </tr>
+      <tr>
+        <td title="">
+          <label for="customer_new_phone">Phone:</label>
+        </td>
+        <td title=""><input type="text" id="customer_new_phone" name="customer_new_phone" value=""/></td>
+      </tr>
+      <tr>
+        <td title="">
+          <label for="customer_new_email">Email:</label>
+        </td>
+        <td title=""><input type="text" id="customer_new_email" name="customer_new_email" value=""/></td>
+      </tr>
+      <tr>
+        <td title="Has this user been asked if they'd like to be on our mailing list?">
+          <label for="customer_new_emailList">Email List:</label>
+        </td>
+        <td title="Has this user been asked if they'd like to be on our mailing list?"><input type="hidden" name="_customer_new_emailList" /><input type="checkbox" name="customer_new_emailList" id="customer_new_emailList"  /></td>
+      </tr>
+      <tr>
+        <td title="">
+          <label for="customer_new_address">Address:</label>
+        </td>
+        <td title=""><input type="text" id="customer_new_address" name="customer_new_address" value=""/></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<script>
+  $(document).ready(function(){$("#customer").autocomplete({source:"/Ticketeer/customer/ajaxSearch", delay: 100, minLength: 2, select:function(event, data) {if (data.item) {$("#customer_id").val(data.item.id);$("#customer_id").change();}}});});
+</script>
+
+<input id="customer" name="customer" type="text" class="autocomplete" value="" /><input id="customer_id" name="customer_id" type="hidden" class="many-to-one-id"/>
+
+
+<a href="#" class="icon ui-state-default" id="customer_new" style="display: inline-block;">
+  <span class="icon ui-icon ui-icon-plus" title="Create a new Customer for this Reservation" />
+</a>
+<a onclick="goTo('customer','customer.id','')" class="icon ui-state-default" style="display: inline-block;">
+  <span class="icon ui-icon ui-icon-extlink" title="Edit this Customer" />
+</a>
+<script>$(document).ready(function(){$("#customer_new").click(function(){newManyToOne("customer");});});</script>
+                                </td>
+                            </tr> 
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="performance">Performance:</label>
+                                </td>
+                                <td valign="middle" class="value ">
+                                    <div id="performance_new_dialog" title="Create New Performance" style="display:none;">
+  <table>
+    <tbody>
+      <tr>
+        <td title="">
+          <label for="performance_new_show">Show:</label>
+        </td>
+        <td title="">
+<input id="performance_new_show_controller" name="performance_new_show_controller" type="hidden" class="many-to-one-controller" value="Performance"/>
+<input id="performance_new_show_name" name="performance_new_show_name" type="hidden" class="many-to-one-name" value="Show"/>
+<input id="performance_new_show_method" name="performance_new_show_method" type="hidden" class="many-to-one-method" value="reservation/ajaxUpdatePerformanceShowOptions?index=###"/>
+<select name="performance_new_show.id" class="many-to-one-id ajaxUpdate" id="performance_new_show.id" >
+<option value="1" >A Chicken Lips Christmas</option>
+<option value="7" >Carbuncle</option>
+<option value="6" >Ricky</option>
+<option value="5" >Take This Bob and Shove It</option>
+<option value="3" >That's My Pygmy!</option>
+<option value="4" >The Annoyers</option>
+<option value="2" >What The Dickens!</option>
+</select>
+
+</td>
+      </tr>
+      <tr>
+        <td title="">
+          <label for="performance_new_dateAndTime">Date And Time:</label>
+        </td>
+        <td title=""><input type="test" class="calendarField" id="performance_new_dateAndTime" name="performance_new_dateAndTime" value=""/>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</div><select name="performance.id" id="performance.id" >
+<option value="null"></option>
+<option value="8"  class="past">That's My Pygmy! - Fri, 10/22/10 at 5:50 AM (0)</option>
+<option value="5" selected="selected">A Chicken Lips Christmas - Sat, 10/23/10 at 5:50 AM (5)</option>
+<option value="18" >That's My Pygmy! - Wed, 10/27/10 at 5:50 AM (10)</option>
+<option value="28" >Carbuncle - Fri, 10/29/10 at 5:50 AM (1)</option>
+<option value="6" >What The Dickens! - Mon, 11/01/10 at 5:50 AM (0)</option>
+<option value="16" >What The Dickens! - Tue, 11/02/10 at 5:50 AM (8)</option>
+<option value="26" >Carbuncle - Mon, 11/08/10 at 5:50 AM (0)</option>
+<option value="7" >That's My Pygmy! - Thu, 11/11/10 at 5:50 AM (0)</option>
+<option value="17" >That's My Pygmy! - Fri, 11/12/10 at 5:50 AM (6)</option>
+<option value="27" >Carbuncle - Thu, 11/18/10 at 5:50 AM (0)</option>
+<option value="9" >The Annoyers - Sun, 11/21/10 at 5:50 AM (0)</option>
+<option value="19" >The Annoyers - Mon, 11/22/10 at 5:50 AM (4)</option>
+<option value="29" >Carbuncle - Sun, 11/28/10 at 5:50 AM (0)</option>
+<option value="10" >The Annoyers - Wed, 12/01/10 at 5:50 AM (0)</option>
+<option value="20" >The Annoyers - Mon, 12/06/10 at 5:50 AM (0)</option>
+<option value="11" >The Annoyers - Sat, 12/11/10 at 5:50 AM (10)</option>
+<option value="21" >The Annoyers - Thu, 12/16/10 at 5:50 AM (8)</option>
+<option value="12" >The Annoyers - Tue, 12/21/10 at 5:50 AM (10)</option>
+<option value="22" >The Annoyers - Sun, 12/26/10 at 5:50 AM (0)</option>
+<option value="13" >Take This Bob and Shove It - Fri, 12/31/10 at 5:50 AM (4)</option>
+<option value="23" >Take This Bob and Shove It - Wed, 01/05/11 at 5:50 AM (0)</option>
+</select>
+
+<a href="#" class="icon ui-state-default" id="performance_new" style="display: inline-block;">
+  <span class="icon ui-icon ui-icon-plus" title="Create a new Performance for this Reservation" />
+</a>
+<a onclick="goTo('performance','performance.id','')" class="icon ui-state-default" style="display: inline-block;">
+  <span class="icon ui-icon ui-icon-extlink" title="Edit this Performance" />
+</a>
+<script>$(document).ready(function(){$("#performance_new").click(function(){newManyToOne("performance");});});</script>
+                                </td>
+                            </tr> 
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="notes">Notes:</label>
+                                </td>
+                                <td valign="middle" class="value ">
+                                    <input type="text" id="notes" name="notes" value=""/>
+                                </td>
+                            </tr> 
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="totalSeats">Total Seats:</label>
+                                </td>
+                                <td valign="middle" class="value ">
+                                    <span id="totalSeats">0</span>
+                                </td>
+                            </tr> 
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="cost">Cost:</label>
+                                </td>
+                                <td valign="middle" class="value ">
+                                    <span id="cost">$0.00</span>
+                                </td>
+                            </tr> 
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="paid">Paid:</label>
+                                </td>
+                                <td valign="middle" class="value ">
+                                    <input type="hidden" name="_paid" /><input type="checkbox" name="paid" id="paid"  />
+                                </td>
+                            </tr> 
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="seats">Seats:</label>
+                                </td>
+                                <td valign="middle" class="value ">
+                                    <div class="hidden">
+  <table>
+    <tbody id="seats_row">
+      <tr class="hidden oneToMany">
+        <input type="hidden" name="seats_###_id" value="-1" id="seats_###_id" />
+        <td><input type="text" id="seats_###_quantity" name="seats_###_quantity" value=""  class="numeric"/></td>
+        <td>
+<input id="seats_###_price_controller" name="seats_###_price_controller" type="hidden" class="many-to-one-controller" value="ReservationItem"/>
+<input id="seats_###_price_name" name="seats_###_price_name" type="hidden" class="many-to-one-name" value="Price"/>
+<input id="seats_###_price_method" name="seats_###_price_method" type="hidden" class="many-to-one-method" value="reservation/ajaxUpdateSeatsPriceOptions?index=###"/>
+<select name="seats_###_price.id" class="many-to-one-id ajaxUpdate" id="seats_###_price.id" >
+<option value="10" >Annoy ($11.00)</option>
+<option value="6" >BOGO ($0.00)</option>
+<option value="9" >Carbuncle! ($10.00)</option>
+<option value="4" >Comp ($0.00)</option>
+<option value="8" >Full ($22.00)</option>
+<option value="5" >Gift Certificate ($0.00)</option>
+<option value="2" >Group ($18.00)</option>
+<option value="3" >Matinee ($15.00)</option>
+<option value="7" >Special ($10.00)</option>
+<option value="1" >Student/Senior ($18.00)</option>
+<option value="12" >chicken ($13.00)</option>
+<option value="11" >ricky full ($12.00)</option>
+</select>
+
+</td>
+        <td><input type="text" id="seats_###_discount" name="seats_###_discount" value=""  class="numeric"/></td>
+        <td class="ui-state-default">
+          <a href="/Ticketeer/reservationItem/edit" class="icon-link" style="margin-right: auto;margin-left:auto;">
+            <span class="icon ui-icon ui-icon-extlink" style="margin-right: auto;margin-left:auto;" />
+          </a>
+        </td>
+        <td class="ui-state-default">
+          <a href="#" class="icon-link delete" style="margin-right: auto;margin-left:auto;">
+            <span class="icon ui-icon ui-icon-close" style="margin-right: auto;margin-left:auto;" />
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<script>$(document).ready(function(){$("#seats_add").click(function(){addOneToMany("seats",'reservation');});$("#seats_tbody .numeric").live('keyup',function(event) {ajaxCalculateDependents("reservation",event);});$("#seats_tbody .many-to-one-id").live('change',function(event) {ajaxCalculateDependents("reservation",event);});$("#seats_add").click(function(event){ajaxCalculateDependents("reservation",event);});$("#seats_tbody td a.delete").live('click',function(event){ajaxCalculateDependents("reservation",event);});});</script>
+
+<table>
+  <input type="hidden" name="seats_num" value="" class="oneToManyCount" id="seats_num" />
+  <tbody id="seats_tbody">
+    <tr>
+      <th class="ui-widget-content">Quantity</th>
+      <th class="ui-widget-content">Price</th>
+      <th class="ui-widget-content">Discount</th>
+      <th class="ui-widget-content">Edit</th>
+      <th class="ui-widget-content">Delete</th>
+    </tr>
+    
+  </tbody>
+  <tbody>
+    <tr>
+      <td>
+        <input type="submit" class="ui-state-default" name="seats_add" value="Add Seats" onclick="return false" title="Add a Reservation Item to this Reservation" id="seats_add" />
+      </td>
+    </tr>
+  </tbody>
+</table>
+                                </td>
+                            </tr> 
+                        
+                        </tbody>
+                    </table>
+                </div>
+                <div class="action ui-widget-header">
+                    <input class="ui-state-default" type="submit" value="Create" />
+                </div>
+            </form>
+        </div>
+       <div id="dateTimeDialog" title="Select Date and Time" style="display:none;">
+        <div id="datepicker"></div>
+        <form style="margin-left:auto;margin-right:auto;width:60%;">
+          <select name='dateTime_hour' id='dateTime_hour' class="ui-state-default">
+            <option value='1' >1</option>
+            <option value='2' >2</option>
+            <option value='3' >3</option>
+
+            <option value='4' >4</option>
+            <option value='5' >5</option>
+            <option value='6' >6</option>
+            <option value='7' >7</option>
+            <option value='8' >8</option>
+            <option value='9' >9</option>
+            <option value='10' >10</option>
+            <option value='11' >11</option>
+            <option value='12' >12</option>
+
+          </select> :
+          <select name='dateTime_minute' id='dateTime_minute' class="ui-state-default">
+            <option value='00' >00</option>
+            <option value='30' >30</option>
+          </select>
+          <select name='dateTime_am_pm' id='dateTime_am_pm' class="ui-state-default">
+            <option value='AM' >AM</option>
+            <option value='PM' >PM</option>
+          </select>
+        </form>
+      </div>
+   
+        
+  </body>
+</html>

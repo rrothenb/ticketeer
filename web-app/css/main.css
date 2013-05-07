@@ -1,0 +1,222 @@
+html * {
+    margin: 0;
+    /*padding: 0; SELECT NOT DISPLAYED CORRECTLY IN FIREFOX */
+    font-size: 12px;
+}
+
+.body {
+    float: left;
+    width: 1000px;
+}
+
+/* TABLES */
+
+table {
+    border: 1px solid #ccc;
+    width: 100%
+}
+
+table.print {
+    border-width: 1px;
+    border-spacing: 0px;
+    border-style: solid;
+    border-color: black;
+}
+
+tr {
+    border: 0;
+}
+
+option.past {
+    text-decoration: line-through;
+}
+
+
+.tabs {
+    float: left;
+    padding: 5px 0px 0px 5px;
+    outline-width: 0;
+    border: 0;
+}
+
+.hidden {
+    visibility: hidden;
+    padding: 0;
+    height: 0;
+}
+
+.calendarField {
+    width: 220px;
+}
+
+.tabs tr {
+    outline-width: 0;
+    border: 0;
+}
+
+.tabs td {
+    outline-width: 0;
+    border: 0;
+}
+
+.tabs a {
+    margin: 5px;
+}
+
+.tabs span {
+    float: right;
+    margin: 0px 0px 0px 5px;
+}
+
+a.icon-link {
+    border: 0;
+}
+
+.action button, .action input {
+    padding: 2px 6px;
+    margin: 0px 3px;
+}
+
+.action, .message, .main, .pagination, .filter {
+    margin: 5px 5px 0px 5px;
+}
+
+.action, .message, .pagination, .filter {
+    padding: 5px 5px 5px 5px;
+}
+
+td.name, td.value {
+    padding: 5px 5px 5px 5px;
+}
+
+input[type="text"] {
+    width: 75%;
+}
+
+.value table input[type="text"] {
+    width: 100%;
+}
+
+.even {
+    opacity: .7;
+}
+
+/* PAGINATION */
+
+.pagination a {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-color: #ccc #aaa #aaa #ccc;
+    color: #666;
+    margin: 0 3px;
+    padding: 2px 6px;
+}
+.pagination span {
+    padding: 2px 3px;
+}
+
+.main a {
+    text-decoration: none;
+}
+
+.button {
+    padding: 5px 5px 5px 5px;
+    margin: 5px 5px 5px 5px;
+}
+
+.pagination-buttons {
+    margin: 3px 3px 3px 3px;
+}
+
+.list .main {
+    width: 990px;
+}
+
+.list-length-control {
+    float: right;
+    text-align: right;
+    width: 30%;
+}
+
+.list-filter-control {
+    float: left;
+    width: 70%;
+}
+
+div.pagination-buttons {
+    background: inherit;
+    border-width: 0px 0px 0px 0px;
+    width: 0px;
+}
+
+.step, .currentStep, .nextLink {
+}
+
+a.icon {
+    vertical-align: middle;
+}
+
+a.icon span.icon {
+    vertical-align: middle;
+}
+
+button span.ui-icon {
+    width: 12px;
+    height: 12px;
+}
+
+td.value table {
+    border: 0;
+}
+
+td.name label {
+    font-weight: bold;
+}
+
+div.print h1  {
+    color:#000000;
+    font-size:32px;
+    font-weight:bold;
+    margin:0.8em 0 0.3em;
+}
+
+div.print * {
+    font:16px verdana,arial,helvetica,sans-serif;
+}
+
+div.print .odd  {
+    background:none repeat scroll 0 0 #D7D7D7;
+}
+
+div.print .even  {
+    background:none repeat scroll 0 0 #FFFFFF;
+}
+
+div.print {
+    padding: 5px;
+    margin: 5px;
+}
+
+div.print td {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+div.print tr.even td, div.print tr.odd td {
+    border-width: 1px 0px 1px 0px;
+    border-color: black;
+    border-style: solid;
+}
+
+option.past {
+    color: red;
+    text-decoration: line-through;
+}
+
+div.message li {
+    display: block;
+}
+
+table.main tr.ui-widget-content td a {
+    font-weight: normal;
+}

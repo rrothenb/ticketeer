@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<overview Implementation-Title="Canoo Webtest" Implementation-Version="R_1810">
+	<folder name="001_CheckThatTicketeerComesUp">
+<summary duration='5532' starttime='Fri Oct 22 07:00:15 MDT 2010' name='check that Ticketeer comes up' successful='no'><topsteps total='48' notexecuted='38' failed='1' successful='9'></topsteps><steps total='48' notexecuted='38' failed='1' successful='9'></steps><timingprofile number='3' average='1802'><range to='1' number='1' from='0'></range><range to='3' number='1' from='1'></range><range to='5' number='1' from='3'></range><range to='10' number='0' from='5'></range><range to='30' number='0' from='10'></range><range number='0' from='30'></range></timingprofile><failingstep description='' name='clickLink'></failingstep></summary>
+</folder>
+
+</overview>
