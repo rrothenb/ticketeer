@@ -42,3 +42,7 @@
 # other
 *.iws
 
+/.idea
+/out
+/projectFilesBackup
+
