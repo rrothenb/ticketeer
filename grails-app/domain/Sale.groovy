@@ -1,6 +1,3 @@
-import org.codehaus.groovy.grails.web.servlet.mvc.GrailsWebRequest
-import org.springframework.web.context.request.RequestContextHolder
-
 class Sale implements Comparable {
     Date timeAndDate
     Customer customer

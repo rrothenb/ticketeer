@@ -1,26 +1,15 @@
-import org.codehaus.groovy.grails.commons.GrailsDomainClass
-import org.codehaus.groovy.grails.orm.hibernate.support.ClosureEventTriggeringInterceptor as Events
-import org.codehaus.groovy.grails.scaffolding.DomainClassPropertyComparator
-import org.codehaus.groovy.grails.commons.GrailsDomainClassProperty
-import org.codehaus.groovy.grails.validation.ValidatorConstraint
+import grails.core.GrailsDomainClass
+import grails.core.GrailsDomainClassProperty
+import grails.events.Events
+import grails.util.Holders
+import org.grails.validation.DomainClassPropertyComparator
+import org.grails.validation.ValidatorConstraint
 import org.springframework.validation.BeanPropertyBindingResult
 import groovy.xml.MarkupBuilder
-import org.codehaus.groovy.grails.commons.GrailsApplication
-import org.codehaus.groovy.grails.commons.ApplicationHolder
 import org.apache.commons.logging.LogFactory
-import org.springframework.validation.Errors
 import org.springframework.validation.FieldError
 import org.apache.commons.lang.StringUtils
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author rick
- */
 class Scaffolding {
     private static def log = LogFactory.getLog(this)
 
@@ -40,11 +29,11 @@ class Scaffolding {
         exclude.add(domainClass)
         LinkedHashMap results = new LinkedHashMap()
         def excludedProps = ['version',
-                                         'id',
-            Events.ONLOAD_EVENT,
-            Events.BEFORE_DELETE_EVENT,
-            Events.BEFORE_INSERT_EVENT,
-            Events.BEFORE_UPDATE_EVENT]
+                             'id',
+                             Events.ONLOAD_EVENT,
+                             Events.BEFORE_DELETE_EVENT,
+                             Events.BEFORE_INSERT_EVENT,
+                             Events.BEFORE_UPDATE_EVENT]
         def props = domainClass.properties.findAll { !excludedProps.contains(it.name)}
         DomainClassPropertyComparator comparator = new DomainClassPropertyComparator(domainClass)
         Collections.sort(props, comparator)
@@ -842,7 +831,7 @@ class Scaffolding {
     // TODO filterableStrings needs to take into account toStringFields for manytoones.  Could be recursive
 
     static getCharacteristics(String theClass) {
-        GrailsDomainClass domainClass = ApplicationHolder.application.getArtefact("Domain", theClass)
+        GrailsDomainClass domainClass = Holders.grailsApplication.getArtefact("Domain", theClass)
         DomainClassPropertyComparator comparator = new DomainClassPropertyComparator(domainClass)
         boolean hasFilterableDate = false
         boolean hasFilterableStrings = false
