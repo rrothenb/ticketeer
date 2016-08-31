@@ -1,5 +1,5 @@
 
 class TaxCodeController {
 
-    def scaffold = true
+    def scaffold = TaxCode
 }

@@ -1,4 +1,4 @@
 class ReservationController {
 
-    def scaffold = true
+    def scaffold = Reservation
 }

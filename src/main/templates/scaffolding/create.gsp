@@ -1,4 +1,3 @@
-<% import org.codehaus.groovy.grails.orm.hibernate.support.ClosureEventTriggeringInterceptor as Events %>
 <%=packageName%>
 <html>
     <head>
@@ -26,7 +25,7 @@
                 <g:renderErrors bean="\${${propertyName}}" as="list" />
             </div>
             </g:hasErrors>
-            <g:form action="save" method="post" <%= multiPart ? ' enctype="multipart/form-data"' : '' %>>
+            <g:form action="save" method="post">
                 <div class="main dialog">
                     <table class="ui-widget-content">
                         <tbody>

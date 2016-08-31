@@ -1,5 +1,5 @@
 
 class PerformanceController {
 
-    def scaffold = true
+    def scaffold = Performance
 }

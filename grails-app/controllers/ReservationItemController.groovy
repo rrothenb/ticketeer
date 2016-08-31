@@ -1,5 +1,5 @@
 
 class ReservationItemController {
 
-    def scaffold = true
+    def scaffold = ReservationItem
 }

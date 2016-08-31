@@ -1,5 +1,5 @@
 
 class ShowPriceController {
 
-    def scaffold = true
+    def scaffold = ShowPrice
 }

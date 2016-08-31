@@ -1,5 +1,5 @@
 
 class SeatSaleController {
 
-    def scaffold = true
+    def scaffold = SeatSale
 }

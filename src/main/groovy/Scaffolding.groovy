@@ -372,7 +372,7 @@ class Scaffolding {
         return sw.toString()
     }
 
-    static private String renderOneToMany(domainClass,property,domainInstance,cp,dependencies) {
+    static public String renderOneToMany(domainClass,property,domainInstance,cp,dependencies) {
         log.info "*** renderOneToMany - domainClass: ${domainClass}, property - ${property}, domainInstance: ${domainInstance}, cp: ${cp}, dependencies: ${dependencies}"
         def sw = new StringWriter()
         def listableFields = Scaffolding.listableFields(domainClass, property, domainInstance)

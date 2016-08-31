@@ -1,5 +1,5 @@
 
 class ShowController {
 
-    def scaffold = true
+    def scaffold = Show
 }

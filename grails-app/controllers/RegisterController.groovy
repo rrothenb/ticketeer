@@ -1,5 +1,5 @@
 
 class RegisterController {
 
-    def scaffold = true
+    def scaffold = Register
 }

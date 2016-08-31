@@ -1,5 +1,5 @@
 
 class TheaterController {
 
-    def scaffold = true
+    def scaffold = Theater
 }

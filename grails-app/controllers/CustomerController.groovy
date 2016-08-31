@@ -1,5 +1,5 @@
 
 class CustomerController {
 
-    def scaffold = true
+    def scaffold = Customer
 }

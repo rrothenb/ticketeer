@@ -1,5 +1,5 @@
 
 class TransactionController {
 
-    def scaffold = true
+    def scaffold = Transaction
 }
