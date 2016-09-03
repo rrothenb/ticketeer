@@ -1,3 +1,4 @@
+<%@ page import="xkafold.Scaffolding" %>
 <% import org.grails.orm.hibernate.support.ClosureEventTriggeringInterceptor as Events %>
 <%=packageName%>
 <html>
@@ -83,7 +84,7 @@
                     %>
                     <%
                     props.each { p ->
-                      if (Scaffolding.canBeCreatedBy(domainClass, p)) {
+                      if (xkafold.Scaffolding.canBeCreatedBy(domainClass, p)) {
 
                     %>
                     <button type="button" class="ui-state-default linkButton" value="\${createLink(action:'create',controller:'${p.referencedDomainClass.propertyName}')}?${domainClass.propertyName}.id=\${${propertyName}?.id}&${domainClass.propertyName}_id=\${${propertyName}?.id}" title="Create a new ${p.referencedDomainClass.naturalName}">

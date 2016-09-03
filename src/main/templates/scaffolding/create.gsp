@@ -30,7 +30,7 @@
                     <table class="ui-widget-content">
                         <tbody>
                         <%
-                            props = Scaffolding.determineCreateFields(domainClass)
+                            props = xkafold.Scaffolding.determineCreateFields(className)
                             props.each { p -> %>
                             <tr class="prop">
                                 <td valign="top" class="name">

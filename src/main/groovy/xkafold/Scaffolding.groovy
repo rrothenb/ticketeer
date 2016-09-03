@@ -1,3 +1,5 @@
+package xkafold
+
 import grails.core.GrailsDomainClass
 import grails.core.GrailsDomainClassProperty
 import grails.events.Events
@@ -15,11 +17,7 @@ class Scaffolding {
 
     static List excludedProps =
         ['version',
-        'id',
-        Events.ONLOAD_EVENT,
-        Events.BEFORE_DELETE_EVENT,
-        Events.BEFORE_INSERT_EVENT,
-        Events.BEFORE_UPDATE_EVENT]
+        'id']
 
     static LinkedHashMap describe(GrailsDomainClass domainClass, List exclude) {
         return describe(domainClass, exclude, "")
@@ -772,15 +770,15 @@ class Scaffolding {
         return false
     }
 
-    static List determineCreateFields(GrailsDomainClass domainClass) {
+    static List determineCreateFields(String domainClassName) {
         def excludedProps = ['version',
-                                               'id',
-            Events.ONLOAD_EVENT,
-            Events.BEFORE_DELETE_EVENT,
-            Events.BEFORE_INSERT_EVENT,
-            Events.BEFORE_UPDATE_EVENT]
+                                               'id']
 
 
+        GrailsDomainClass domainClass = Holders.grailsApplication.getArtefact("Domain", domainClassName)
+        println Holders.grailsApplication.class.simpleName
+        println domainClass.class.simpleName
+        println domainClass
         def props = []
         for (prop in domainClass.properties) {
             if (!excludedProps.contains(prop.name) && prop.persistent && (!prop.oneToMany || prop.owningSide)) {
@@ -811,6 +809,7 @@ class Scaffolding {
         log.debug "determineCreateFields - props: ${props.size()}"
         DomainClassPropertyComparator comparator = new DomainClassPropertyComparator(domainClass)
         Collections.sort(props, comparator)
+        println props
         return props
     }
 

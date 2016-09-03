@@ -1,6 +1,8 @@
 import org.codehaus.groovy.grails.orm.hibernate.support.ClosureEventTriggeringInterceptor as Events
 import org.codehaus.groovy.grails.commons.GrailsDomainClass
 import org.codehaus.groovy.grails.scaffolding.DomainClassPropertyComparator
+import xkafold.Scaffolding
+
 import javax.servlet.http.Cookie
 import grails.converters.JSON
 <%import org.apache.commons.lang.StringUtils%>
